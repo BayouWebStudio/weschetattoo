@@ -231,7 +231,7 @@
         const name = document.getElementById('t-name').value;
         const body = document.getElementById('t-body').value;
         const ig = document.getElementById('t-ig').value;
-        const to = "hello@weschetattoo.com";
+        const to = "raulwesche@gmail.com";
         const sub = encodeURIComponent("New Testimonial - " + name);
         const msg = encodeURIComponent("Name: " + name + "
 Instagram: " + ig + "
@@ -269,6 +269,13 @@ Instagram: " + ig + "
         el.setAttribute('href', el.getAttribute('data-' + LANG.current + '-href') || el.getAttribute('href'));
       });
     }
+    // Apply language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[data-es][data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
+      });
+    });
+
     // Fade-up on scroll
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
