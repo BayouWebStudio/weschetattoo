@@ -216,9 +216,9 @@
         <div class="info-block fade-up">
           <h3 data-en="Details" data-es="Detalles">Details</h3>
           <div class="info-item"><span>&#x25c6;</span> <span>Houston, Texas, US</span></div>
-          <div class="info-item"><span>&#x25c6;</span> <span data-en="Specializing in Sacred Geometry" data-es="Especialidad: Sacred Geometry">Specializing in Sacred Geometry</span></div>
+          <div class="info-item"><span>&#x25c6;</span> <span data-en="Specializing in Tattoo Art" data-es="Especialidad: Tattoo Art">Specializing in Tattoo Art</span></div>
           <div class="info-item"><span>&#x25c6;</span> <a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener" style="color:var(--dim);text-decoration:none;">@weschetattoo</a></div>
-          
+          <div class="info-item"><span>&#x25c6;</span> <a href="mailto:raulwesche@gmail.com" style="color:var(--dim);text-decoration:none;">raulwesche@gmail.com</a></div>
           <div class="info-item"><span>&#x25c6;</span> <span data-en="Custom designs welcome" data-es="Dise&#xf1;os personalizados bienvenidos">Custom designs welcome</span></div>
         </div>
         <div class="ig-cta fade-up">
@@ -231,10 +231,35 @@
       </div>
       <div class="form-panel">
         <h2 class="fade-up" data-en="Send an Inquiry" data-es="Enviar una Consulta">Send an Inquiry</h2>
-        <div class="fade-up" style="text-align:center;padding:48px 32px;border:1px solid var(--border);">
-          <p style="color:var(--dim);margin-bottom:24px;" data-en="Send a DM on Instagram to start your project." data-es="Env&#xed;a un DM en Instagram para comenzar tu proyecto.">Send a DM on Instagram to start your project.</p>
-          <a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener" class="btn-gold" data-en="Message on Instagram" data-es="Mensaje en Instagram">Message on Instagram</a>
-        </div>
+        <form action="https://formsubmit.co/raulwesche@gmail.com" method="POST" class="fade-up">
+          <input type="hidden" name="_subject" value="New Tattoo Inquiry">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-group">
+            <label data-en="Name" data-es="Nombre">Name</label>
+            <input type="text" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label data-en="Phone (optional)" data-es="Tel&#xe9;fono (opcional)">Phone (optional)</label>
+            <input type="tel" name="phone" placeholder="Your phone">
+          </div>
+          <div class="form-group">
+            <label data-en="Placement" data-es="Ubicaci&#xf3;n">Placement</label>
+            <input type="text" name="placement" required placeholder="Arm, back, leg...">
+          </div>
+          <div class="form-group">
+            <label data-en="Your Vision" data-es="Tu Visi&#xf3;n">Your Vision</label>
+            <textarea name="vision" rows="5" required placeholder="Describe your tattoo idea..."></textarea>
+          </div>
+          <div class="form-group">
+            <label data-en="References (optional)" data-es="Referencias (opcional)">References (optional)</label>
+            <input type="text" name="references" placeholder="Links to reference images">
+          </div>
+          <button type="submit" class="btn-submit" data-en="Send Inquiry" data-es="Enviar Consulta">Send Inquiry</button>
+        </form>
       </div>
     </div>
   </div>
@@ -264,6 +289,13 @@
         el.setAttribute('href', el.getAttribute('data-' + LANG.current + '-href') || el.getAttribute('href'));
       });
     }
+    // Apply language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[data-es][data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
+      });
+    });
+
     // Fade-up on scroll
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
