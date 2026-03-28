@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://bayouwebstudio.github.io/weschetattoo/about.html">
   <meta property="og:title" content="About &#x2014; Raul Wesche">
   <meta property="og:description" content="I'm Raul Wesche, a tattoo artist based in Houston, Texas.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/BayouWebStudio/weschetattoo/main/img/2.jpg">
+  <meta property="og:image" content="https://raw.githubusercontent.com/BayouWebStudio/weschetattoo/main/img/1.jpg">
   <meta property="og:url" content="https://bayouwebstudio.github.io/weschetattoo/about.html">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,7 +140,7 @@
     }
   
     .page-hero { padding: 160px 72px 80px; background: var(--charcoal); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-    .page-hero-bg { position: absolute; inset: 0; background-image: url('img/2.jpg'); background-size: cover; background-position: center; filter: brightness(0.25); }
+    .page-hero-bg { position: absolute; inset: 0; background-image: url('img/1.jpg'); background-size: cover; background-position: center; filter: brightness(0.25); }
     .page-hero-content { position: relative; z-index: 2; }
     .page-eyebrow { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
     h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
@@ -207,7 +207,7 @@
         <p class="fade-up">Every piece is unique, created with intention and care.</p>
         <p class="fade-up">Get in touch to start your project.</p>
         <div class="specialty-tags fade-up">
-          <span class="tag">Sacred Geometry</span>
+          <span class="tag">Tattoo Art</span>
           <span class="tag">Houston, Texas</span>
           <span class="tag" data-en="Tattoo Artist" data-es="Artista de Tatuaje">Tattoo Artist</span>
           <span class="tag" data-en="Custom Work" data-es="Trabajo Personalizado">Custom Work</span>
@@ -220,11 +220,11 @@
           <div class="stat-small" data-en="Years of Experience" data-es="A&#xf1;os de Experiencia">Years of Experience</div>
         </div>
         <div class="stat-card fade-up">
-          <div class="stat-big">296.7K</div>
+          <div class="stat-big">296.9K</div>
           <div class="stat-small" data-en="Instagram Followers" data-es="Seguidores en Instagram">Instagram Followers</div>
         </div>
         <div class="stat-card fade-up">
-          <div class="stat-big">Sacred</div>
+          <div class="stat-big">Tattoo</div>
           <div class="stat-small" data-en="Primary Style" data-es="Estilo Principal">Primary Style</div>
         </div>
         <div class="stat-card fade-up">
@@ -260,6 +260,13 @@
         el.setAttribute('href', el.getAttribute('data-' + LANG.current + '-href') || el.getAttribute('href'));
       });
     }
+    // Apply language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[data-es][data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
+      });
+    });
+
     // Fade-up on scroll
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
