@@ -280,21 +280,26 @@
   </footer>
   
   <script>
-    const LANG = { default: 'en', current: 'en' };
+    const LANG = { default: 'en', current: document.documentElement.lang || 'en' };
     function toggleLang() {
       LANG.current = LANG.current === 'es' ? 'en' : 'es';
+      document.documentElement.lang = LANG.current;
       document.querySelectorAll('[data-es][data-en]').forEach(el => {
         el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
       });
       document.querySelectorAll('[data-es-href][data-en-href]').forEach(el => {
         el.setAttribute('href', el.getAttribute('data-' + LANG.current + '-href') || el.getAttribute('href'));
       });
+      const btn = document.querySelector('.lang-toggle');
+      if (btn) btn.textContent = LANG.current === 'es' ? 'EN' : 'ES';
     }
-    // Apply language on page load
+    // Apply language on page load based on html lang attribute
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('[data-es][data-en]').forEach(el => {
         el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
       });
+      const btn = document.querySelector('.lang-toggle');
+      if (btn) btn.textContent = LANG.current === 'es' ? 'EN' : 'ES';
     });
 
     // Fade-up on scroll
