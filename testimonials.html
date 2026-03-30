@@ -163,6 +163,11 @@
       .testimonials-body { padding: 60px 24px; }
       .placeholder-block { padding: 40px 24px; }
     }
+  
+    /* Testimonial star rating */
+    .star-rating { display:flex; gap:4px; margin-top:4px; }
+    .star { background:none; border:none; font-size:1.9rem; cursor:pointer; padding:0; line-height:1; color:rgba(255,255,255,0.2); transition:color 0.12s, transform 0.1s; }
+    .star:hover { transform:scale(1.15); }
   </style>
 </head>
 <body>
@@ -210,38 +215,142 @@
     <div class="share-section fade-up">
       <h2 data-en="Share Your Experience" data-es="Comparte tu Experiencia">Share Your Experience</h2>
       <p data-en="Got tattooed by Raul Wesche? We'd love to hear your story." data-es="&#xbf;Te tatu&#xf3; Raul Wesche? Nos encantar&#xed;a escuchar tu historia.">Got tattooed by Raul Wesche? We'd love to hear your story.</p>
-      <form onsubmit="submitTestimonial(event)">
+      <form id="testimonial-form" onsubmit="submitTestimonial(event)">
         <div class="form-group">
           <label data-en="Your Name" data-es="Tu Nombre">Your Name</label>
-          <input type="text" id="t-name" required placeholder="Your name">
+          <input type="text" id="t-name" required placeholder="Your name" autocomplete="name">
         </div>
+
+        <div class="form-group">
+          <label data-en="Rating" data-es="Calificaci&#xf3;n">Rating</label>
+          <div class="star-rating" id="star-rating" role="group" aria-label="Star rating">
+            <button type="button" class="star" data-val="1">&#9733;</button>
+            <button type="button" class="star" data-val="2">&#9733;</button>
+            <button type="button" class="star" data-val="3">&#9733;</button>
+            <button type="button" class="star" data-val="4">&#9733;</button>
+            <button type="button" class="star" data-val="5">&#9733;</button>
+          </div>
+          <input type="hidden" id="t-rating" value="0">
+        </div>
+
         <div class="form-group">
           <label data-en="Your Experience" data-es="Tu Experiencia">Your Experience</label>
           <textarea id="t-body" rows="5" required placeholder="Tell us about your experience..."></textarea>
         </div>
+
+        <div class="form-group">
+          <label data-en="Photo (optional)" data-es="Foto (opcional)">Photo (optional)</label>
+          <input type="file" id="t-photo" accept="image/*" style="display:none">
+          <div id="photo-placeholder" onclick="document.getElementById('t-photo').click()" style="cursor:pointer;border:1px dashed rgba(255,255,255,0.2);border-radius:8px;padding:20px;text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;">Click to add a photo</div>
+          <img id="t-photo-preview" src="" alt="Preview" style="display:none;max-width:120px;max-height:120px;border-radius:8px;margin-top:8px;object-fit:cover;">
+          <button type="button" id="t-photo-remove" onclick="removePhoto()" style="display:none;margin-top:6px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:0.8rem;cursor:pointer;">Remove photo</button>
+        </div>
+
         <div class="form-group">
           <label>Instagram (optional)</label>
           <input type="text" id="t-ig" placeholder="@handle">
         </div>
-        <button type="submit" class="btn-submit" data-en="Submit" data-es="Enviar">Submit</button>
-        <p id="t-success" style="display:none;color:var(--gold);margin-top:16px;" data-en="Thank you! Your testimonial has been sent." data-es="&#xa1;Gracias! Tu testimonio ha sido enviado.">Thank you! Your testimonial has been sent.</p>
+
+        <button type="submit" id="t-submit" class="btn-submit">Submit Review</button>
+        <p id="t-success" style="display:none;color:var(--gold);margin-top:16px;">&#x2713; Thank you! Your review has been received and is pending approval.</p>
+        <p id="t-error" style="display:none;color:#e05252;margin-top:16px;font-size:0.9rem;"></p>
       </form>
       <script>
-      function submitTestimonial(e) {
-        e.preventDefault();
-        const name = document.getElementById('t-name').value;
-        const body = document.getElementById('t-body').value;
-        const ig = document.getElementById('t-ig').value;
-        const to = "raulwesche@gmail.com";
-        const sub = encodeURIComponent("New Testimonial - " + name);
-        const msg = encodeURIComponent("Name: " + name + "
-Instagram: " + ig + "
+  (function() {
+    // ── Star rating ──
+    var selectedRating = 0;
+    document.querySelectorAll('.star').forEach(function(btn) {
+      btn.addEventListener('mouseover', function() { hl(+this.dataset.val); });
+      btn.addEventListener('mouseout', function() { hl(selectedRating); });
+      btn.addEventListener('click', function() {
+        selectedRating = +this.dataset.val;
+        document.getElementById('t-rating').value = selectedRating;
+        hl(selectedRating);
+      });
+    });
+    function hl(n) {
+      document.querySelectorAll('.star').forEach(function(s) {
+        s.style.color = +s.dataset.val <= n ? 'var(--gold,#c9a84c)' : 'rgba(255,255,255,0.2)';
+      });
+    }
+    hl(0);
 
-" + body);
-        window.location.href = "mailto:" + to + "?subject=" + sub + "&body=" + msg;
-        document.getElementById('t-success').style.display = 'block';
-      }
-      </script>
+    // ── Photo upload ──
+    var photoBase64 = null;
+    document.getElementById('t-photo').addEventListener('change', function() {
+      var file = this.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        var img = new Image();
+        img.onload = function() {
+          var MAX = 300, w = img.width, h = img.height;
+          if (w > MAX || h > MAX) { if (w > h) { h = Math.round(h*MAX/w); w = MAX; } else { w = Math.round(w*MAX/h); h = MAX; } }
+          var c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(img, 0, 0, w, h);
+          photoBase64 = c.toDataURL('image/jpeg', 0.72);
+          document.getElementById('t-photo-preview').src = photoBase64;
+          document.getElementById('t-photo-preview').style.display = 'block';
+          document.getElementById('photo-placeholder').style.display = 'none';
+          document.getElementById('t-photo-remove').style.display = 'inline';
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+    window.removePhoto = function() {
+      photoBase64 = null;
+      document.getElementById('t-photo').value = '';
+      document.getElementById('t-photo-preview').style.display = 'none';
+      document.getElementById('t-photo-remove').style.display = 'none';
+      document.getElementById('photo-placeholder').style.display = 'block';
+    };
+
+    // ── Submit ──
+    window.submitTestimonial = function(e) {
+      e.preventDefault();
+      var name = document.getElementById('t-name').value.trim();
+      var reviewText = document.getElementById('t-body').value.trim();
+      var rating = +document.getElementById('t-rating').value;
+      var ig = document.getElementById('t-ig').value.trim();
+      var errEl = document.getElementById('t-error');
+      errEl.style.display = 'none';
+
+      if (!rating) { errEl.textContent = 'Please select a star rating.'; errEl.style.display = 'block'; return; }
+      if (!name)   { errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
+      if (!reviewText) { errEl.textContent = 'Please write your experience.'; errEl.style.display = 'block'; return; }
+
+      var btn = document.getElementById('t-submit');
+      btn.disabled = true; btn.textContent = 'Sending…';
+
+      var payload = { slug: 'weschetattoo', name: name, rating: rating, reviewText: reviewText + (ig ? '
+
+Instagram: ' + ig : '') };
+      if (photoBase64) payload.photoBase64 = photoBase64;
+
+      fetch('https://curious-lemming-262.convex.site/api/testimonials/submit', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.ok) {
+          document.getElementById('testimonial-form').style.display = 'none';
+          document.getElementById('t-success').style.display = 'block';
+        } else {
+          errEl.textContent = d.error || 'Something went wrong. Please try again.';
+          errEl.style.display = 'block';
+          btn.disabled = false; btn.textContent = 'Submit Review';
+        }
+      })
+      .catch(function() {
+        errEl.textContent = 'Network error. Please try again.';
+        errEl.style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Submit Review';
+      });
+    };
+  })();
+</script>
     </div>
   </div>
 
