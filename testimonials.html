@@ -241,7 +241,7 @@
         <div class="form-group">
           <label data-en="Photo (optional)" data-es="Foto (opcional)">Photo (optional)</label>
           <input type="file" id="t-photo" accept="image/*" style="display:none">
-          <div id="photo-placeholder" onclick="document.getElementById('t-photo').click()" style="cursor:pointer;border:1px dashed rgba(255,255,255,0.2);border-radius:8px;padding:20px;text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;">Click to add a photo</div>
+          <label for="t-photo" id="photo-placeholder" style="display:block;cursor:pointer;border:1px dashed rgba(255,255,255,0.2);border-radius:8px;padding:20px;text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;">Click to add a photo</label>
           <img id="t-photo-preview" src="" alt="Preview" style="display:none;max-width:120px;max-height:120px;border-radius:8px;margin-top:8px;object-fit:cover;">
           <button type="button" id="t-photo-remove" onclick="removePhoto()" style="display:none;margin-top:6px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:0.8rem;cursor:pointer;">Remove photo</button>
         </div>
@@ -324,9 +324,7 @@
       var btn = document.getElementById('t-submit');
       btn.disabled = true; btn.textContent = 'Sending…';
 
-      var payload = { slug: 'weschetattoo', name: name, rating: rating, reviewText: reviewText + (ig ? '
-
-Instagram: ' + ig : '') };
+      var payload = { slug: 'weschetattoo', name: name, rating: rating, reviewText: reviewText + (ig ? '\n\nInstagram: ' + ig : '') };
       if (photoBase64) payload.photoBase64 = photoBase64;
 
       fetch('https://curious-lemming-262.convex.site/api/testimonials/submit', {
