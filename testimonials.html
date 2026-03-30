@@ -168,6 +168,11 @@
     .star-rating { display:flex; gap:4px; margin-top:4px; }
     .star { background:none; border:none; font-size:1.9rem; cursor:pointer; padding:0; line-height:1; color:rgba(255,255,255,0.2); transition:color 0.12s, transform 0.1s; }
     .star:hover { transform:scale(1.15); }
+  
+    /* Approved reviews */
+    #reviews-grid { display:grid; grid-template-columns:1fr; gap:20px; margin-bottom:56px; }
+    @media(min-width:640px){ #reviews-grid { grid-template-columns:1fr 1fr; } }
+    .review-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:12px; padding:24px; }
   </style>
 </head>
 <body>
@@ -207,7 +212,9 @@
   </section>
 
   <div class="testimonials-body">
-    <div class="placeholder-block fade-up">
+    <!-- Approved reviews loaded dynamically -->
+    <div id="reviews-grid"></div>
+    <div id="reviews-placeholder" class="placeholder-block fade-up">
       <p data-en="Be the first to share your experience." data-es="S&#xe9; el primero en compartir tu experiencia.">Be the first to share your experience.</p>
       <small data-en="Use the form below &#x2193;" data-es="Usa el formulario de abajo &#x2193;">Use the form below &#x2193;</small>
     </div>
@@ -257,6 +264,45 @@
       </form>
       <script>
   (function() {
+    // ── Load approved reviews ──
+    (function loadReviews() {
+      fetch('https://curious-lemming-262.convex.site/api/testimonials/approved?slug=weschetattoo')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          var reviews = Array.isArray(data) ? data : (data.testimonials || []);
+          var grid = document.getElementById('reviews-grid');
+          var placeholder = document.getElementById('reviews-placeholder');
+          if (!reviews.length || !grid) return;
+          placeholder.style.display = 'none';
+          grid.innerHTML = reviews.map(function(r){
+            var stars = [1,2,3,4,5].map(function(i){
+              return '<span style="color:'+(i<=r.rating?'var(--gold)':'rgba(255,255,255,0.15)')+';font-size:1.05rem;">&#9733;</span>';
+            }).join('');
+            var photo = r.photoBase64
+              ? '<img src="'+r.photoBase64+'" alt="'+r.name+'" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid rgba(255,255,255,0.1);">'
+              : '<div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:600;">'+r.name.charAt(0).toUpperCase()+'</div>';
+            var date = new Date(r.createdAt).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+            var text = r.reviewText.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            return '<div class="review-card fade-up">'
+              +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'
+              +photo
+              +'<div style="flex:1;min-width:0;">'
+              +'<div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">'+r.name+'</div>'
+              +'<div>'+stars+'</div>'
+              +'</div>'
+              +'<div style="font-size:0.72rem;color:var(--dim);flex-shrink:0;">'+date+'</div>'
+              +'</div>'
+              +'<p style="font-size:0.9rem;line-height:1.75;color:rgba(255,255,255,0.72);font-style:italic;margin:0;">&ldquo;'+text+'&rdquo;</p>'
+              +'</div>';
+          }).join('');
+          // trigger fade-up animation
+          setTimeout(function(){
+            grid.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); });
+          }, 60);
+        })
+        .catch(function(){});
+    })();
+
     // ── Star rating ──
     var selectedRating = 0;
     document.querySelectorAll('.star').forEach(function(btn) {
