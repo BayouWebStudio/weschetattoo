@@ -571,6 +571,14 @@
   }
 
   cartLoad(); renderCartBadge();
+
+  // Sync cart across tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === CART_KEY) {
+      cartLoad(); renderCartBadge();
+      if (drawer.classList.contains('open')) renderCartDrawer();
+    }
+  });
 })();
 </script>
 <!-- LIGHTBOX -->
