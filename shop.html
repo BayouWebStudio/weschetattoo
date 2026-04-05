@@ -381,6 +381,8 @@
   var SLUG = 'weschetattoo';
   var API = 'https://curious-lemming-262.convex.site';
 
+  function esc(s) { if (!s) return ''; var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
   var toastEl = document.getElementById('shop-toast');
   var toastTimer = null;
   function showToast(msg, type) {
@@ -498,15 +500,15 @@
       grid.innerHTML = '';
       allProducts.forEach(function(p) {
         var soldOut = p.soldOut || false;
-        var imgHtml = p.imageUrl ? '<img class="store-card-img" src="' + p.imageUrl + '" alt="' + p.name + '">' : '<div class="store-card-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--dim);">&#128722;</div>';
+        var imgHtml = p.imageUrl ? '<img class="store-card-img" src="' + p.imageUrl + '" alt="' + esc(p.name) + '">' : '<div class="store-card-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--dim);">&#128722;</div>';
         var priceStr = fmtPrice(p.price);
         var badgeHtml = soldOut ? '<span class="store-badge store-badge-sold-out">Sold Out</span>' : '';
         var card = document.createElement('div');
         card.className = 'store-card' + (soldOut ? ' store-sold-out' : '');
         card.innerHTML = imgHtml +
           '<div class="store-card-body">' +
-            '<div class="store-card-name">' + p.name + '</div>' +
-            (p.description ? '<div class="store-card-desc">' + p.description + '</div>' : '') +
+            '<div class="store-card-name">' + esc(p.name) + '</div>' +
+            (p.description ? '<div class="store-card-desc">' + esc(p.description) + '</div>' : '') +
             '<div class="store-card-meta"><div class="store-card-price">' + priceStr + '</div>' + badgeHtml + '</div>' +
             (!soldOut ? '<div class="qty-row"><button class="qty-btn" data-qty-action="minus" data-pid="' + p.stripePriceId + '">&#8722;</button><input class="qty-input" type="number" min="1" value="1" data-qty-input="' + p.stripePriceId + '"><button class="qty-btn" data-qty-action="plus" data-pid="' + p.stripePriceId + '">+</button></div>' : '') +
             '<div class="btn-pair"><button class="btn-add-cart" ' + (soldOut ? 'disabled' : '') + ' data-add-cart="' + p.stripePriceId + '">Add to Cart</button><button class="btn-buy-now" ' + (soldOut ? 'disabled' : '') + ' data-buy-now="' + p.stripePriceId + '">Buy Now</button></div>' +
@@ -537,7 +539,7 @@
         cartAdd(product, qty);
         var orig = btn.textContent; btn.textContent = 'Added!'; btn.disabled = true;
         setTimeout(function() { btn.textContent = orig; btn.disabled = false; }, 1200);
-        showToast(product.name + ' added to cart', 'info');
+        showToast(esc(product.name) + ' added to cart', 'info');
       });
 
       grid.addEventListener('click', function(e) {
