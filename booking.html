@@ -233,32 +233,16 @@
       <div class="form-panel">
         <h2 class="fade-up" data-en="Send an Inquiry" data-es="Enviar una Consulta">Send an Inquiry</h2>
         <form id="booking-form" class="fade-up" onsubmit="submitBooking(event)">
-          <div class="form-group">
-            <label data-en="Name" data-es="Nombre">Name</label>
-            <input type="text" id="b-name" required placeholder="Your name">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="b-email" required placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label data-en="Phone (optional)" data-es="Tel&#xe9;fono (opcional)">Phone (optional)</label>
-            <input type="tel" id="b-phone" placeholder="Your phone">
-          </div>
-          <div class="form-group">
-            <label data-en="Placement" data-es="Ubicaci&#xf3;n">Placement</label>
-            <input type="text" id="b-placement" required placeholder="Arm, back, leg...">
-          </div>
-          <div class="form-group">
-            <label data-en="Your Vision" data-es="Tu Visi&#xf3;n">Your Vision</label>
-            <textarea id="b-vision" rows="5" required placeholder="Describe your tattoo idea..."></textarea>
-          </div>
-          <div class="form-group">
-            <label data-en="References (optional)" data-es="Referencias (opcional)">References (optional)</label>
-            <input type="text" id="b-references" placeholder="Links to reference images">
-          </div>
-          <button type="submit" class="btn-submit" id="b-submit" data-en="Send Inquiry" data-es="Enviar Consulta">Send Inquiry</button>
-          <p id="b-msg" style="margin-top:14px;font-size:0.9rem;text-align:center;display:none;"></p>
+
+          <label for="bname">Your Name</label>
+          <input type="text" id="bname" name="bname" placeholder="Full name" required>
+          <label for="bemail">Email</label>
+          <input type="email" id="bemail" name="bemail" placeholder="your@email.com" required>
+          <label for="bmessage">Message</label>
+          <textarea id="bmessage" name="bmessage" rows="5" placeholder="Tell us about your idea..." required></textarea>
+          <label for="field_1775397395284">New Field</label>
+          <input type="text" id="field_1775397395284" name="field_1775397395284" placeholder="">
+          <button type="submit" class="btn-gold">Send Booking Request</button>
         </form>
         <script>
         function submitBooking(e) {
