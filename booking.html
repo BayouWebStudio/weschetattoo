@@ -264,6 +264,21 @@
             <label for="field_1775499219713">New Field</label>
             <input type="text" id="field_1775499219713" name="field_1775499219713" placeholder="">
           </div>
+
+          <div class="datetime-section">
+            <p class="datetime-label">Preferred Date & Time (optional)</p>
+            <div class="datetime-row">
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="reqDate" name="requestedDate">
+              </div>
+              <div class="form-group">
+                <label>Time</label>
+                <input type="time" id="reqTime" name="requestedTime" disabled>
+              </div>
+            </div>
+            <div id="availInfo" style="display:none;margin-top:8px;font-size:0.82rem;"></div>
+          </div>
           <button type="submit" class="btn-gold">Send Booking Request</button>
         </form>
         <script>
@@ -316,14 +331,18 @@
               phone: document.getElementById('b-phone').value.trim() || undefined,
               service: document.getElementById('b-placement').value.trim(),
               message: fullMessage
-            , referencePhotos: refPhotos.length > 0 ? refPhotos : undefined})
+            , referencePhotos: refPhotos.length > 0 ? refPhotos : undefined,
+              requestedDate: document.getElementById('reqDate')?.value || undefined,
+              requestedTime: document.getElementById('reqTime')?.value || undefined})
           })
           .then(function(r){ return r.json(); })
           .then(function(data){
             if (data.ok) {
               document.getElementById('booking-form').reset();
               msg.style.color = '#7ecfa4';
-              msg.textContent = 'Your inquiry was sent! We\'ll be in touch soon.';
+              var rd = document.getElementById('reqDate')?.value;
+              var rt = document.getElementById('reqTime')?.value;
+              msg.textContent = (rd && rt) ? 'Booking request sent for ' + rd + ' at ' + rt + '! We\'ll confirm soon.' : 'Your inquiry was sent! We\'ll be in touch soon.';
             } else {
               msg.style.color = '#f87171';
               msg.textContent = data.error || 'Something went wrong. Please try again.';
@@ -386,5 +405,52 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   </script>
+<script>
+    // ── Availability check ──
+    (function() {
+      var dateInput = document.getElementById('reqDate');
+      var timeInput = document.getElementById('reqTime');
+      var availInfo = document.getElementById('availInfo');
+      if (!dateInput) return;
+      var today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+      dateInput.addEventListener('change', async function() {
+        var date = dateInput.value;
+        availInfo.style.display = 'none';
+        timeInput.disabled = true;
+        timeInput.value = '';
+        if (!date) return;
+        availInfo.style.display = 'block';
+        availInfo.innerHTML = '<span style="color:var(--dim)">Checking availability...</span>';
+        try {
+          var res = await fetch('https://curious-lemming-262.convex.site/api/booking/availability?slug=weschetattoo&date=' + date);
+          var data = await res.json();
+          if (!data.available) {
+            var reason = data.reason === 'past' ? 'Cannot book a past date' : 'Closed on this day';
+            availInfo.innerHTML = '<span class="avail-closed">' + reason + '</span>';
+            return;
+          }
+          timeInput.disabled = false;
+          timeInput.setAttribute('min', data.workingHours.start);
+          timeInput.setAttribute('max', data.workingHours.end);
+          var html = '<span class="avail-ok">Available ' + data.workingHours.start + ' - ' + data.workingHours.end + '</span>';
+          if (data.busySlots && data.busySlots.length > 0) {
+            html += '<br><span style="color:var(--dim);font-size:0.75rem;">Already booked: </span>';
+            data.busySlots.forEach(function(s) {
+              html += '<span class="busy-slot">' + s.start + ' - ' + s.end + '</span>';
+            });
+          }
+          if (data.fullDayBlocked) {
+            html = '<span class="avail-closed">Fully booked for this day</span>';
+            timeInput.disabled = true;
+          }
+          availInfo.innerHTML = html;
+        } catch (err) {
+          availInfo.innerHTML = '<span style="color:var(--dim)">Could not check availability</span>';
+          timeInput.disabled = false;
+        }
+      });
+    })();
+</script>
 </body>
 </html>
