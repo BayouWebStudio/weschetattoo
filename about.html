@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="slate">
+<html lang="fr" data-theme="sunset">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     
     :root {
@@ -104,7 +104,7 @@
       border-top: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-logo { font-family: 'Outfit', Georgia, serif; font-size: 1.1rem; color: var(--dim); }
+    .footer-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; color: var(--dim); }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a { color: var(--dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
@@ -112,7 +112,7 @@
     /* SHARED */
     .section-label { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
     h2 {
-      font-family: 'Outfit', Georgia, serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 400; line-height: 1.1; margin-bottom: 24px;
     }
@@ -143,13 +143,13 @@
     .page-hero-bg { position: absolute; inset: 0; background-image: url('img/2.jpg'); background-size: cover; background-position: center; filter: brightness(0.25); }
     .page-hero-content { position: relative; z-index: 2; }
     .page-eyebrow { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-    h1 { font-family: 'Outfit', Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
     .about-body { padding: 96px 72px; max-width: 1200px; margin: 0 auto; }
     .about-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; align-items: start; }
     .bio-section p { color: var(--dim); line-height: 1.9; margin-bottom: 28px; font-size: 1rem; }
     .stats-section { position: sticky; top: 100px; }
     .stat-card { border: 1px solid var(--border); padding: 32px; margin-bottom: 16px; text-align: center; }
-    .stat-big { font-family: 'Outfit', Georgia, serif; font-size: 3rem; font-weight: 300; color: var(--gold); }
+    .stat-big { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 3rem; font-weight: 300; color: var(--gold); }
     .stat-small { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px; }
     .specialty-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
     .tag { border: 1px solid var(--border); color: var(--dim); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px; }
@@ -160,6 +160,14 @@
       .stats-section { position: static; }
     }
   </style>
+
+<style data-dashboard-style="1">
+  html { font-size: 18px !important; }
+  .btn-gold, .btn-outline, .book-btn, .hero-cta, .btn, button.cta, a.cta,
+  .float-book, .lang-toggle, input[type="submit"], input[type="button"] {
+    border-radius: 9999px !important;
+  }
+</style>
 </head>
 <body>
   
