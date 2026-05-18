@@ -82,7 +82,7 @@
       text-transform: uppercase;
       padding: 6px 12px;
       cursor: pointer;
-      transition: border-color 0.2s ease-out, color 0.2s ease-out;
+      transition: all 0.2s;
     }
     .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
     .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -104,10 +104,9 @@
       font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
       text-decoration: none; padding: 14px 22px; border-radius: 2px;
       box-shadow: 0 4px 24px rgba(201,168,76,0.35);
-      transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 200ms ease-out;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .book-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
-    .book-float:active { transform: scale(0.97) translateY(0); transition-duration: 100ms; }
     /* FADE-UP ANIMATIONS */
     .fade-up { transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -133,18 +132,16 @@
       display: inline-block; background: var(--gold); color: #000;
       text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em;
       text-transform: uppercase; padding: 16px 40px;
-      transition: opacity 0.2s, transform 160ms ease-out;
+      transition: opacity 0.2s;
     }
-    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-gold:active { transform: scale(0.97) translateY(0); transition-duration: 100ms; }
+    .btn-gold:hover { opacity: 0.88; }
     .btn-outline {
       display: inline-block; border: 1px solid var(--border); color: var(--white);
       text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em;
       text-transform: uppercase; padding: 14px 36px;
-      transition: border-color 0.2s, color 0.2s, transform 160ms ease-out;
+      transition: border-color 0.2s, color 0.2s;
     }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    .btn-outline:active { transform: scale(0.97); transition-duration: 100ms; }
     /* MOBILE */
     @media (max-width: 900px) {
       nav { padding: 18px 24px; } .nav-links { display: none; } .hamburger { display: block; }
@@ -180,10 +177,9 @@
     .hero-cta {
       display: inline-block; border: 1px solid var(--gold); color: var(--gold);
       text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em;
-      text-transform: uppercase; padding: 14px 32px; transition: background 0.2s, color 0.2s, transform 160ms ease-out;
+      text-transform: uppercase; padding: 14px 32px; transition: background 0.2s, color 0.2s;
     }
     .hero-cta:hover { background: var(--gold); color: #000; }
-    .hero-cta:active { transform: scale(0.97); transition-duration: 100ms; }
     .social-row { display: flex; gap: 16px; margin-top: 32px; }
     .social-row a { color: var(--dim); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
     .social-row a:hover { color: var(--gold); }
@@ -202,7 +198,7 @@
     .gallery-section { padding: 96px 72px; background: var(--black); }
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 1200px; margin: 0 auto 48px; }
     .gallery-item { aspect-ratio: 1; overflow: hidden; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 300ms ease-out, transform 300ms cubic-bezier(0.23, 1, 0.32, 1); display: block; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 0.4s, transform 0.4s; display: block; }
     .gallery-item:hover img { filter: brightness(1); transform: scale(1.04); }
     .gallery-cta-wrap { text-align: center; }
     /* BOOKING PREVIEW */
@@ -227,41 +223,6 @@
     @media (max-width: 480px) {
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    /* ACCESSIBILITY - Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-up,
-      .gallery-item img,
-      .btn-gold,
-      .btn-outline,
-      .hero-cta,
-      .book-float {
-        transition-duration: 0.1s !important;
-        animation-duration: 0.1s !important;
-      }
-    }
-
-    /* TOUCH DEVICE PROTECTION - Hover only on devices that support it */
-    @media (hover: hover) and (pointer: fine) {
-      .gallery-item:hover img { filter: brightness(1); transform: scale(1.04); }
-      .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
-      .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-      .hero-cta:hover { background: var(--gold); color: #000; }
-      .book-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
-      .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
-      .about-img:hover { filter: brightness(1); }
-    }
-
-    /* GALLERY STAGGER - Items fade in with cascading delays */
-    .gallery-item:nth-child(1) { transition-delay: 0ms; }
-    .gallery-item:nth-child(2) { transition-delay: 40ms; }
-    .gallery-item:nth-child(3) { transition-delay: 80ms; }
-    .gallery-item:nth-child(4) { transition-delay: 120ms; }
-    .gallery-item:nth-child(5) { transition-delay: 160ms; }
-    .gallery-item:nth-child(6) { transition-delay: 200ms; }
-    .gallery-item:nth-child(7) { transition-delay: 240ms; }
-    .gallery-item:nth-child(8) { transition-delay: 280ms; }
-    .gallery-item:nth-child(9) { transition-delay: 320ms; }
   </style>
     <script type="application/ld+json">{
   "@context": "https://schema.org",
