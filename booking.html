@@ -1,596 +1,431 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="coastal">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking &#x2014; Raul Wesche</title>
-  <meta name="description" content="Book a tattoo session with Raul Wesche in Oaks.">
-  <link rel="canonical" href="https://eternowebstudio.com/weschetattoo/booking.html">
-  <meta property="og:title" content="Booking &#x2014; Raul Wesche">
-  <meta property="og:image" content="https://raw.githubusercontent.com/BayouWebStudio/weschetattoo/main/img/1.jpg">
-  <meta property="og:url" content="https://eternowebstudio.com/weschetattoo/booking.html">
+  <title>Booking — Raul Wesche — Tattoo Artist</title>
+  <meta name="description" content="Raul Wesche — Custom Tattoo Work">
+  <meta property="og:title" content="Raul Wesche">
+  <meta property="og:description" content="Raul Wesche — Custom Tattoo Work">
+  <meta property="og:image" content="img/1.jpg">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap">
   <style>
-    
-    :root {
-      --black: #0a0a1a;
-      --charcoal: #14142a;
-      --gold: #7c3aed;
-      --white: #e0d8f0;
-      --dim: #e0d8f099;
-      --border: #323248;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(10,5,5,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'Bebas Neue', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--dim);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .lang-toggle {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--dim);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 1px; background: var(--white); margin: 5px 0; transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
-    .mobile-menu {
-      display: none; position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
-      background: var(--charcoal); padding: 24px 48px; border-bottom: 1px solid var(--border);
-    }
-    .mobile-menu.open { display: block; }
-    .mobile-menu a { display: block; color: var(--white); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid var(--border); }
-    /* FLOATING BOOK */
-    .book-float {
-      position: fixed; bottom: 32px; right: 32px; z-index: 200;
-      background: var(--gold); color: #000;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      text-decoration: none; padding: 14px 22px; border-radius: 2px;
-      box-shadow: 0 4px 24px rgba(201,168,76,0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .book-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
-    /* FADE-UP ANIMATIONS */
-    .fade-up { transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    /* FOOTER */
-    footer {
-      background: var(--charcoal); padding: 48px 72px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; color: var(--dim); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { color: var(--dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { color: var(--dim); font-size: 0.72rem; }
-    /* SHARED */
-    .section-label { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-    h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 400; line-height: 1.1; margin-bottom: 24px;
-    }
-    .btn-gold {
-      display: inline-block; background: var(--gold); color: #000;
-      text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em;
-      text-transform: uppercase; padding: 16px 40px;
-      transition: opacity 0.2s;
-    }
-    .btn-gold:hover { opacity: 0.88; }
-    .btn-outline {
-      display: inline-block; border: 1px solid var(--border); color: var(--white);
-      text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em;
-      text-transform: uppercase; padding: 14px 36px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    /* MOBILE */
-    @media (max-width: 900px) {
-      nav { padding: 18px 24px; } .nav-links { display: none; } .hamburger { display: block; }
-      footer { flex-direction: column; gap: 24px; padding: 40px 24px; text-align: center; }
-    }
-    @media (max-width: 600px) {
-      footer { padding: 32px 20px; }
-    }
-  
-    .page-hero { padding: 140px 72px 64px; background: var(--charcoal); border-bottom: 1px solid var(--border); }
-    .page-eyebrow { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
-    .booking-body { padding: 96px 72px; max-width: 1200px; margin: 0 auto; }
-    .booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .booking-info h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 300; margin-bottom: 24px; }
-    .booking-info p { color: var(--dim); line-height: 1.8; margin-bottom: 20px; font-size: 0.95rem; }
-    .info-block { margin-top: 40px; padding: 32px; background: var(--charcoal); border: 1px solid var(--border); }
-    .info-block h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 16px; }
-    .info-item { display: flex; gap: 12px; margin-bottom: 12px; color: var(--dim); font-size: 0.88rem; align-items: flex-start; }
-    .info-item span:first-child { color: var(--gold); min-width: 16px; }
-    .form-panel h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 300; margin-bottom: 32px; }
-    .form-group { margin-bottom: 24px; }
-    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%; background: var(--charcoal); border: 1px solid var(--border); color: var(--white);
-      font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 300; padding: 14px 16px;
-      outline: none; transition: border-color 0.2s;
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
-    .form-group select option { background: var(--charcoal); }
-    .form-group textarea { resize: vertical; min-height: 140px; }
-    .btn-submit { width: 100%; background: var(--gold); color: #000; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 18px; font-weight: 500; transition: opacity 0.2s; margin-top: 8px; }
-    .btn-submit:hover { opacity: 0.88; }
-    .ig-cta { margin-top: 32px; padding: 28px; background: var(--charcoal); border: 1px solid var(--border); text-align: center; }
-    .ig-cta p { color: var(--dim); margin-bottom: 16px; font-size: 0.88rem; }
-    .btn-ig { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; font-weight: 500; transition: opacity 0.2s; }
-    .btn-ig:hover { opacity: 0.88; }
-    @media (max-width: 900px) {
-      .page-hero { padding: 120px 24px 48px; }
-      .booking-body { padding: 60px 24px; }
-      .booking-layout { grid-template-columns: 1fr; gap: 48px; }
-    }
-  
-  .ref-upload { margin-top: 8px; }
-  .ref-upload-label { display: inline-block; padding: 8px 16px; background: transparent; border: 1px dashed rgba(255,255,255,0.15); color: var(--dim, #999); font-size: 0.8rem; border-radius: 6px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
-  .ref-upload-label:hover { border-color: var(--gold, #C9A84C); color: var(--gold, #C9A84C); }
-  .ref-previews { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-  .ref-preview { position: relative; width: 64px; height: 64px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-  .ref-preview img { width: 100%; height: 100%; object-fit: cover; }
-  .ref-preview-remove { position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; background: rgba(0,0,0,0.7); color: #fff; border: none; border-radius: 50%; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-    .datetime-section{margin-bottom:24px;padding:20px;background:rgba(255,255,255,0.03);border:1px solid var(--border,#333);border-radius:4px}
-    .datetime-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim,#999);margin-bottom:12px}
-    .avail-ok{color:var(--gold,#C9A84C)}.avail-closed{color:#ff6b6b}
-    .busy-slot{display:inline-block;background:rgba(200,50,50,.15);color:#ff6b6b;padding:2px 8px;border-radius:4px;font-size:.75rem;margin:2px 4px 2px 0}
-    .slot-btn{flex:1;padding:12px 16px;background:var(--charcoal,#1a1a1a);border:1px solid var(--border,#333);color:var(--dim,#999);font-size:.82rem;font-weight:500;cursor:pointer;border-radius:4px;transition:all .2s;font-family:inherit}
-    .slot-btn:hover{border-color:var(--gold,#C9A84C);color:var(--white,#fff)}
-    .slot-btn.slot-active{background:var(--gold,#C9A84C);color:#000;border-color:var(--gold,#C9A84C);font-weight:600}
-    .ref-upload-label{display:block;padding:16px;border:1px dashed var(--border,#333);border-radius:4px;text-align:center;cursor:pointer;color:var(--dim,#999);font-size:.82rem;transition:border-color .2s}
-    .ref-upload-label:hover{border-color:var(--gold,#C9A84C);color:var(--gold,#C9A84C)}
-    .ref-thumb{width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border,#333)}
-    .ref-thumb-wrap{position:relative;display:inline-block}
-    .ref-thumb-remove{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:#ff4444;color:#fff;border:none;border-radius:50%;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
-    .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-    .cal-header span{font-size:.85rem;font-weight:600;color:var(--white,#fff)}
-    .cal-header button{background:none;border:1px solid var(--border,#333);color:var(--dim,#999);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
-    .cal-header button:hover{border-color:var(--gold,#C9A84C);color:var(--gold,#C9A84C)}
-    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
-    .cal-grid .cal-dow{font-size:.6rem;color:var(--dim,#999);text-transform:uppercase;letter-spacing:.05em;padding:4px 0}
-    .cal-grid .cal-day{padding:7px 0;font-size:.8rem;border-radius:4px;cursor:pointer;color:var(--white,#fff);transition:all .15s;border:1px solid transparent}
-    .cal-grid .cal-day:hover:not(.cal-disabled):not(.cal-selected){background:rgba(255,255,255,.06);border-color:var(--border,#333)}
-    .cal-grid .cal-day.cal-selected{background:var(--gold,#C9A84C);color:#000;font-weight:600}
-    .cal-grid .cal-day.cal-disabled{color:var(--border,#333);cursor:default}
-    .cal-grid .cal-day.cal-today:not(.cal-selected){border-color:var(--gold,#C9A84C)}
-    .cal-grid .cal-day.cal-empty{cursor:default}
-    .cal-selected-display{margin-top:8px;font-size:.82rem;color:var(--gold,#C9A84C)}
-  </style>
-
-<!-- dashboard-animations-start -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script defer data-dashboard-anim="statsCounter,heroParallax,scrollProgress,fadeUp,galleryStagger">
-window.addEventListener('load', function() {
-(function() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  try {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Fade-up on scroll — sections gently slide up and fade in.
-    // IMPORTANT: skip elements already in view on page load (gsap.from would
-    // hide them and the scroll trigger wouldn't fire because we're past it).
-    // Also narrowly target content sections only, NOT hero/nav/footer wrappers.
-    var faded = document.querySelectorAll('.fade-up, .section-title, .section-label, .about-preview, .gallery-cta-wrap, .testimonials-preview, .booking-preview, .testimonial-placeholder, .service-card, .style-card');
-    faded.forEach(function(el) {
-      if (el.dataset.dashFaded === '1') return;
-      el.dataset.dashFaded = '1';
-      var rect = el.getBoundingClientRect();
-      var alreadyVisible = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
-      if (alreadyVisible) {
-        // Already on screen — play once, no scroll trigger (so it can never stay hidden)
-        gsap.from(el, { y: 20, autoAlpha: 0, duration: 0.7, ease: 'power2.out' });
-      } else {
-        gsap.from(el, {
-          y: 28, autoAlpha: 0, duration: 0.8, ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none', once: true }
-        });
-      }
-    });
-
-    // Gallery cascade — items appear one after another.
-    // Same safety: skip grids already in view on load.
-    document.querySelectorAll('.gallery-grid, .masonry-grid').forEach(function(grid) {
-      var items = grid.querySelectorAll('.gallery-item, .masonry-item');
-      if (items.length === 0) return;
-      var rect = grid.getBoundingClientRect();
-      var alreadyVisible = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
-      if (alreadyVisible) {
-        gsap.from(items, { y: 16, autoAlpha: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out' });
-      } else {
-        gsap.from(items, {
-          y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out',
-          scrollTrigger: { trigger: grid, start: 'top 90%', toggleActions: 'play none none none', once: true }
-        });
-      }
-    });
-
-    // Stats counter — animate numbers like "297K", "12", "5+" from 0 to target when in view
-    document.querySelectorAll('.stat-num, .stat-number, [data-count]').forEach(function(el) {
-      var text = (el.textContent || '').trim();
-      var m = text.match(/^([\d.,]+)\s*([a-zA-Z+%]*)\s*$/);
-      if (!m) return;
-      var raw = m[1].replace(/,/g, '');
-      var num = parseFloat(raw);
-      if (isNaN(num) || num <= 0) return;
-      var suffix = m[2] || '';
-      var hasDecimal = raw.indexOf('.') !== -1;
-      var obj = { val: 0 };
-      gsap.to(obj, {
-        val: num,
-        duration: 1.6,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
-        onUpdate: function() {
-          el.textContent = (hasDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) + suffix;
-        }
-      });
-    });
-
-    // Hero parallax — hero section moves slower than scroll
-    (function() {
-      var hero = document.querySelector('.hero, [class*="hero-"], header.hero, section.hero');
-      if (!hero) return;
-      gsap.to(hero, {
-        yPercent: 8,
-        ease: 'none',
-        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6 }
-      });
-    })();
-
-    // Scroll progress bar at the very top of the page
-    (function() {
-      var bar = document.createElement('div');
-      bar.setAttribute('data-dashboard-anim', 'progress');
-      bar.style.cssText = 'position:fixed;top:0;left:0;right:0;height:2px;background:var(--gold,var(--accent,#c9a84c));z-index:9999;transform-origin:left center;transform:scaleX(0);pointer-events:none;';
-      document.body.appendChild(bar);
-      gsap.to(bar, {
-        scaleX: 1, ease: 'none',
-        scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: 0.2 }
-      });
-    })();
-  } catch (e) { /* animation failure must never break the site */ }
-})();
-});
-</script>
-<!-- dashboard-animations-end -->
-
-<style data-dashboard-style="1">
-  html { font-size: 16px !important; }
-  .btn-gold, .btn-outline, .book-btn, .hero-cta, .btn, button.cta, a.cta,
-  .float-book, .lang-toggle, input[type="submit"], input[type="button"] {
-    border-radius: 8px !important;
+:root {
+    --black: #0a0a0a;
+    --near-black: #141414;
+    --charcoal: #141414;
+    --accent: #C9A84C;
+    --accent-dim: rgba(201,168,76,0.6);
+    --white: #e8e0d0;
+    --dim: #e8e0d099;
+    --border: #323232;
   }
-</style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(10,5,5,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem; font-weight: 400; letter-spacing: 0.1em;
+  color: var(--white); text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--dim); text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+.lang-toggle {
+  background: none; border: 1px solid var(--border);
+  color: var(--dim); font-size: 0.7rem; letter-spacing: 0.1em;
+  padding: 6px 14px; cursor: pointer; text-transform: uppercase;
+  border-radius: 3px; transition: all 0.2s;
+}
+.lang-toggle:hover { color: var(--white); border-color: var(--white); }
+
+
+.hamburger {
+  display: none; background: none; border: none;
+  cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1px;
+  background: var(--white); margin: 5px 0;
+  transition: 0.2s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  background: var(--near-black);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0.45;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0.3) 50%,
+    var(--black) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 720px; padding: 0 32px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400;
+  line-height: 1.1; margin-bottom: 20px;
+}
+.hero-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem; font-weight: 300; color: var(--dim);
+  max-width: 500px; margin: 0 auto;
+}
+
+/* ── BUTTONS ── */
+.btn-accent {
+  display: inline-block; margin-top: 32px;
+  padding: 14px 40px;
+  background: var(--accent); color: var(--black);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-accent:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── SECTIONS ── */
+section {
+  padding: 100px 48px;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 18px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 400;
+  line-height: 1.2; margin-bottom: 40px;
+}
+.section-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem; line-height: 1.8; color: var(--dim);
+  max-width: 640px;
+}
+
+/* ── GALLERY ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 40px;
+}
+.gallery-item {
+  position: relative; overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+
+/* ── ABOUT ── */
+.about-link {
+  display: inline-block; margin-top: 32px;
+  color: var(--accent); text-decoration: none;
+  font-size: 0.78rem; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+.about-link:hover { opacity: 0.7; }
+.profile-facts {
+  margin-top: 24px;
+  padding-left: 20px;
+  color: var(--dim);
+  list-style: disc;
+}
+.profile-facts li { margin-bottom: 8px; }
+
+/* ── FADE-UP — PERMANENT FIX: no opacity:0 here ── */
+.fade-up {
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.lightbox-overlay.active { display: flex; opacity: 1; }
+.lightbox-overlay img {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain; border-radius: 2px;
+}
+.lightbox-close {
+  position: absolute; top: 24px; right: 32px;
+  background: none; border: none; color: var(--white);
+  font-size: 2rem; cursor: pointer;
+  opacity: 0.75; transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--white);
+  font-size: 3rem; cursor: pointer;
+  opacity: 0.6; transition: opacity 0.2s;
+  user-select: none; padding: 16px;
+}
+.lightbox-arrow:hover { opacity: 1; }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+
+/* ── TESTIMONIALS ── */
+.home-testimonial-text {
+  font-family: 'monospace', Georgia, serif;
+  font-size: 1.05rem; font-style: italic;
+  line-height: 1.7; margin-bottom: 16px;
+  opacity: 0.9;
+}
+.home-testimonial-author {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+}
+.home-testimonials-viewall { margin-top: 40px; text-align: center; }
+.home-testimonials-viewall a {
+  color: var(--dim); text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.home-testimonials-viewall a:hover { opacity: 0.8; }
+
+/* ── BOOKING CTA ── */
+.booking-cta {
+  text-align: center;
+  padding: 100px 48px;
+  background: var(--near-black);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.booking-cta .section-title { margin-bottom: 12px; }
+.booking-cta .section-body { margin: 0 auto 32px; }
+.booking-form {
+  max-width: 820px;
+  margin: 40px auto 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.booking-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.booking-form input,
+.booking-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--white);
+  border-radius: 4px;
+  padding: 14px 16px;
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  outline: none;
+}
+.booking-form input:focus,
+.booking-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accentDim); }
+.booking-form textarea { resize: vertical; min-height: 140px; }
+.booking-form .btn-accent { align-self: flex-start; border: 0; cursor: pointer; }
+.form-status { min-height: 24px; color: var(--accent); font-size: 0.9rem; }
+.booking-fallback { display: inline-block; margin-top: 24px; color: var(--dim); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.booking-fallback:hover { color: var(--accent); }
+
+
+.floating-book {
+  position: fixed; bottom: 24px; right: 24px; z-index: 99;
+  background: #C9A84C; color: #0a0a0a;
+  padding: 12px 24px; border-radius: 3px;
+  font-family: inherit; font-size: 0.72rem;
+  font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.floating-book:hover { opacity: 0.88; transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 60px 48px; text-align: center;
+  border-top: 1px solid var(--border);
+}
+.footer-links { display: flex; justify-content: center; gap: 32px; list-style: none; margin-bottom: 24px; }
+.footer-links a {
+  color: var(--dim); text-decoration: none;
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-copy {
+  font-size: 0.68rem; color: var(--dim);
+  letter-spacing: 0.08em;
+}
+
+/* ── BILINGUAL ── */
+[data-es] { display: none; }
+html[lang="es"] [data-en] { display: none; }
+html[lang="es"] [data-es] { display: revert; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 14px 18px; gap: 16px; align-items: center; }
+  .nav-logo { font-size: 1.05rem; letter-spacing: 0.06em; max-width: 70%; line-height: 1.15; }
+  .hamburger { display: block; margin-left: auto; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(10,5,5,0.98);
+    padding: 24px 18px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open a { font-size: 0.85rem; color: var(--white); }
+
+  .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+  section { padding: 64px 24px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .booking-form .btn-accent { width: 100%; text-align: center; }
+  .lightbox-arrow { font-size: 2rem; }
+  .lightbox-close { top: 16px; right: 20px; }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 80vh; }
+}
+  </style>
 </head>
 <body>
-  
   <nav>
-    <a href="./index.html" class="nav-logo">weschetattoo</a>
+    <a href="./index.html" class="nav-logo" aria-label="Raul Wesche">Raul Wesche</a>
+    <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="./index.html" 
-        data-en="Home" data-es="Home">Home</a></li>
-      <li><a href="./about.html" 
-        data-en="About" data-es="Sobre M&#xed;">About</a></li>
-      <li><a href="./tattoos.html" 
-        data-en="Tattoos" data-es="Tatuajes">Tattoos</a></li>
-      <li><a href="./booking.html" class="active"
-        data-en="Booking" data-es="Reservaciones">Booking</a></li>
-      <li><a href="./testimonials.html" 
-        data-en="Reviews" data-es="Testimonios">Reviews</a></li>
-      <li><a href="paintings.html">Paintings</a></li>
-      <li><a href="shop.html" data-en="Shop" data-es="Tienda">Shop</a></li>
-      <li><button class="lang-toggle" onclick="toggleLang()">ES</button></li>
-    </ul>
-    <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-  <div class="mobile-menu">
-    <a href="./index.html" data-en="Home" data-es="Inicio">Home</a>
-    <a href="./about.html" data-en="About" data-es="Sobre M&#xed;">About</a>
-    <a href="./tattoos.html" data-en="Tattoos" data-es="Tatuajes">Tattoos</a>
-    <a href="./booking.html" data-en="Booking" data-es="Reservaciones">Booking</a>
-    <a href="./testimonials.html" data-en="Reviews" data-es="Testimonios">Reviews</a>
-  </div>
-  <a href="./booking.html" class="book-float" data-en="Book" data-es="Reservar">Book</a>
-
-  <section class="page-hero">
-    <p class="page-eyebrow fade-up" data-en="Let's Work Together" data-es="Trabajemos Juntos">Let's Work Together</p>
-    <h1 class="fade-up" data-en="Raul Wesche" data-es="Raul Wesche">Raul Wesche</h1>
-  </section>
-
-  <div class="booking-body">
-    <div class="booking-layout">
-      <div class="booking-info">
-        <h2 class="fade-up" data-en="Contact Info" data-es="Informaci&#xf3;n de Contacto">Contact Info</h2>
-        <p class="fade-up">Every piece is unique, created with intention and care.</p>
-        <div class="info-block fade-up">
-          <h3 data-en="Details" data-es="Detalles">Details</h3>
-          <div class="info-item"><span>&#x25c6;</span> <span>Oaks, US</span></div>
-          <div class="info-item"><span>&#x25c6;</span> <span data-en="Specializing in Sacred Geometry" data-es="Especialidad: Sacred Geometry">Specializing in Sacred Geometry</span></div>
-          <div class="info-item"><span>&#x25c6;</span> <a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener" style="color:var(--dim);text-decoration:none;">@weschetattoo</a></div>
-          <div class="info-item"><span>&#x25c6;</span> <a href="mailto:raulwesche@gmail.com" style="color:var(--dim);text-decoration:none;">raulwesche@gmail.com</a></div>
-          <div class="info-item"><span>&#x25c6;</span> <span data-en="Custom designs welcome" data-es="Dise&#xf1;os personalizados bienvenidos">Custom designs welcome</span></div>
-        </div>
-        <div class="ig-cta fade-up">
-          <p data-en="Prefer Instagram DM?" data-es="&#xbf;Preferes Instagram DM?">Prefer Instagram DM?</p>
-          <a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener" class="btn-ig">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            Send DM
-          </a>
-        </div>
-      </div>
-      <div class="form-panel">
-        <h2 class="fade-up" data-en="Send an Inquiry" data-es="Enviar una Consulta">Send an Inquiry</h2>
-        <form id="booking-form" class="fade-up" onsubmit="submitBooking(event)">
-          <div class="form-group">
-            <label for="bname">Your Name</label>
-            <input type="text" id="bname" name="bname" placeholder="Full name" required>
-          </div>
-          <div class="form-group">
-            <label for="bemail">Email</label>
-            <input type="email" id="bemail" name="bemail" placeholder="your@email.com" required>
-          </div>
-          <div class="form-group">
-            <label for="bmessage">Message</label>
-            <textarea id="bmessage" name="bmessage" rows="5" placeholder="Tell us about your idea..." required></textarea>
-          </div>
-<div class="datetime-section">
-            <p class="datetime-label">Preferred Date (optional)</p>
-            <input type="hidden" name="requestedDate" id="reqDate">
-            <input type="hidden" name="requestedTime" id="reqTime">
-            <div id="calWidget"></div>
-            <div id="availInfo" style="display:none;margin-top:10px;font-size:0.82rem;"></div>
-            <div id="slotPicker" style="display:none;margin-top:12px;">
-              <p style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim,#999);margin-bottom:8px;">Preferred Time</p>
-              <div style="display:flex;gap:10px;">
-                <button type="button" class="slot-btn" id="slotEarly" onclick="window.__pickSlot('early')">Morning / Early</button>
-                <button type="button" class="slot-btn" id="slotLate" onclick="window.__pickSlot('late')">Afternoon / Late</button>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Reference Photos (optional)</label>
-            <label class="ref-upload-label">
-              <span>Click to upload photos</span>
-              <input type="file" id="refPhotoInput" accept="image/*" multiple style="display:none" onchange="window.__handleRefPhotos(this)">
-            </label>
-            <div id="refPreviews" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
-          </div>
-
-                    <button type="submit" class="btn-gold">Send Booking Request</button>
-          <div id="formMsg" style="display:none;margin-top:16px;padding:16px;text-align:center;font-size:0.88rem;border-radius:4px;"></div>
-        </form>
-        <script>
-        var refPhotos = [];
-          function handleRefPhotos(input) {
-            var files = Array.from(input.files || []);
-            files.slice(0, 5 - refPhotos.length).forEach(function(file) {
-              if (file.size > 10*1024*1024) return;
-              var reader = new FileReader();
-              reader.onload = function(e) {
-                var img = new Image();
-                img.onload = function() {
-                  var canvas = document.createElement('canvas');
-                  var maxDim = 800, w = img.width, h = img.height;
-                  if (w > maxDim || h > maxDim) { if (w > h) { h = Math.round(h*maxDim/w); w = maxDim; } else { w = Math.round(w*maxDim/h); h = maxDim; } }
-                  canvas.width = w; canvas.height = h;
-                  canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                  refPhotos.push(canvas.toDataURL('image/jpeg', 0.7));
-                  renderRefPreviews();
-                };
-                img.src = e.target.result;
-              };
-              reader.readAsDataURL(file);
-            });
-            input.value = '';
-          }
-          function renderRefPreviews() {
-            var c = document.getElementById('ref-previews'); c.innerHTML = '';
-            refPhotos.forEach(function(p, i) {
-              c.innerHTML += '<div class="ref-preview"><img src="'+p+'" alt="Ref"><button class="ref-preview-remove" onclick="refPhotos.splice('+i+',1);renderRefPreviews();">&times;</button></div>';
-            });
-            var label = document.querySelector('.ref-upload-label');
-            if (label) label.style.display = refPhotos.length >= 5 ? 'none' : '';
-          }
-          function submitBooking(e) {
-          e.preventDefault();
-          var form = document.getElementById('booking-form');
-          if (!form) return;
-          var btn = form.querySelector('button[type="submit"]') || form.querySelector('.btn-gold');
-          // Find fields by ID or by name attribute
-          function getVal(ids) {
-            for (var i = 0; i < ids.length; i++) {
-              var el = document.getElementById(ids[i]) || form.querySelector('[name="'+ids[i]+'"]');
-              if (el) return (el.value || '').trim();
-            }
-            return '';
-          }
-          var name = getVal(['bname','b-name','name']);
-          var email = getVal(['bemail','b-email','email']);
-          var message = getVal(['bmessage','b-message','b-vision','vision','message']);
-          if (!name || !email || !message) { alert('Please fill in all required fields.'); return; }
-          var origText = btn ? btn.textContent : 'Send';
-          if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-          var payload = {
-            slug: 'weschetattoo',
-            name: name,
-            email: email,
-            message: message
-          };
-          var phone = getVal(['bphone','b-phone','phone']);
-          if (phone) payload.phone = phone;
-          var service = getVal(['bplacement','b-placement','placement','service']);
-          if (service) payload.service = service;
-          var rd = document.getElementById('reqDate');
-          var rt = document.getElementById('reqTime');
-          if (rd && rd.value && rt && rt.value) { payload.requestedDate = rd.value; payload.requestedTime = rt.value; }
-          if (window.__refPhotos && window.__refPhotos.length > 0) payload.referencePhotos = window.__refPhotos;
-          fetch('https://curious-lemming-262.convex.site/api/booking/submit', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(payload)
-          })
-          .then(function(r) { return r.json(); })
-          .then(function(data) {
-            if (data.ok) {
-              form.reset();
-              var ai=document.getElementById('availInfo');if(ai)ai.style.display='none';
-              var sp=document.getElementById('slotPicker');if(sp)sp.style.display='none';
-              document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('slot-active')});
-              if(window.__refPhotos)window.__refPhotos.length=0;
-              var rp=document.getElementById('refPreviews');if(rp)rp.innerHTML='';
-              var ul=document.querySelector('.ref-upload-label');if(ul)ul.style.display='';
-              if(rd)rd.value='';if(rt)rt.value='';
-              if(btn){btn.style.background='#22c55e';btn.textContent='Sent!';}
-              setTimeout(function(){if(btn){btn.style.background='';btn.textContent=origText;btn.disabled=false;}},3000);
-            } else {
-              alert(data.error || 'Something went wrong. Please try again.');
-              if(btn){btn.disabled=false;btn.textContent=origText;}
-            }
-          })
-          .catch(function() {
-            alert('Something went wrong. Please try again.');
-            if(btn){btn.disabled=false;btn.textContent=origText;}
-          });
-        }
-        </script>
-      </div>
-    </div>
-  </div>
-
-  
-  <footer>
-    <div class="footer-logo">Raul Wesche</div>
-    <div class="footer-links">
-      <a href="./index.html">Home</a>
-      <a href="./about.html">About</a>
-      <a href="./tattoos.html">Tattoos</a>
-      <a href="./booking.html">Booking</a>
-      <a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener">Instagram</a>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./tattoos.html">Tattoos</a></li>
+      <li><a href="./booking.html" class="active">Booking</a></li>
+      <li><a href="./testimonials.html">Reviews</a></li>
       
-    </div>
-    <div class="footer-copy">&#xa9; 2026 Raul Wesche</div>
+    </ul>
+  </nav>
+  <section id="book" class="booking-cta fade-up">
+    <p class="section-label">Booking</p>
+    <h2 class="section-title">Start a Booking Request</h2>
+    <p class="section-body">Send the basics: idea, placement, size, budget, and timing. The request goes straight to the artist dashboard for follow-up.</p>
+    <form id="booking-request-form" class="booking-form">
+      <div class="form-grid">
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Phone<input name="phone" autocomplete="tel"></label>
+        <label>Service / Style<input name="service" placeholder="Blackwork, realism, sleeve..."></label>
+        <label>Placement<input name="placement" placeholder="Forearm, ribs, back..."></label>
+        <label>Budget<input name="budget" placeholder="$300–$600"></label>
+      </div>
+      <label>Preferred dates<input name="preferredDates" placeholder="Weekends, next month, specific dates..."></label>
+      <label>Project details<textarea name="message" rows="6" required placeholder="Describe the idea, size, references, and anything the artist should know."></textarea></label>
+      <button type="submit" class="btn-accent">Send Request</button>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+    <a href="http://wesche.com/" class="booking-fallback" target="_blank" rel="noopener">Prefer Instagram? Message directly →</a>
+  </section>
+  <footer>
+    <ul class="footer-links"><li><a href="./index.html">Home</a></li><li><a href="./about.html">About</a></li><li><a href="./tattoos.html">Tattoos</a></li><li><a href="./booking.html">Booking</a></li><li><a href="./testimonials.html">Reviews</a></li></ul>
+    <p class="footer-copy">&copy; 2026 Raul Wesche. All rights reserved.</p>
+    <p class="footer-copy" style="margin-top:8px;opacity:.55">Site by Eterno Web Studio</p>
   </footer>
-  
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lightbox-arrow lightbox-prev" onclick="lightboxNav(-1)" aria-label="Previous">&#8249;</button>
+    <img src="" alt="" id="lightbox-img">
+    <button class="lightbox-arrow lightbox-next" onclick="lightboxNav(1)" aria-label="Next">&#8250;</button>
+  </div>
+  <a href="http://wesche.com/" class="floating-book" target="_blank" rel="noopener">Book</a>
   <script>
-    const LANG = { default: 'en', current: document.documentElement.lang || 'en' };
-    function toggleLang() {
-      LANG.current = LANG.current === 'es' ? 'en' : 'es';
-      document.documentElement.lang = LANG.current;
-      document.querySelectorAll('[data-es][data-en]').forEach(el => {
-        el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
-      });
-      document.querySelectorAll('[data-es-href][data-en-href]').forEach(el => {
-        el.setAttribute('href', el.getAttribute('data-' + LANG.current + '-href') || el.getAttribute('href'));
-      });
-      const btn = document.querySelector('.lang-toggle');
-      if (btn) btn.textContent = LANG.current === 'es' ? 'EN' : 'ES';
-    }
-    // Apply language on page load based on html lang attribute
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('[data-es][data-en]').forEach(el => {
-        el.textContent = el.getAttribute('data-' + LANG.current) || el.textContent;
-      });
-      const btn = document.querySelector('.lang-toggle');
-      if (btn) btn.textContent = LANG.current === 'es' ? 'EN' : 'ES';
-    });
-
-    // Fade-up on scroll
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  </script>
-<script>
-(function(){var h=document.getElementById('reqDate');var ai=document.getElementById('availInfo');var cw=document.getElementById('calWidget');if(!h||!cw)return;
-var td=new Date();td.setHours(0,0,0,0);var vY=td.getFullYear(),vM=td.getMonth(),sel=null;
-var D=['Su','Mo','Tu','We','Th','Fr','Sa'],M=['January','February','March','April','May','June','July','August','September','October','November','December'];
-function p(n){return n<10?'0'+n:''+n}function f(y,m,d){return y+'-'+p(m+1)+'-'+p(d)}
-function r(){var fi=new Date(vY,vM,1),sd=fi.getDay(),dm=new Date(vY,vM+1,0).getDate();
-var o='<div class="cal-header"><button type="button" onclick="window.__calPrev()">&#8249;</button><span>'+M[vM]+' '+vY+'</span><button type="button" onclick="window.__calNext()">&#8250;</button></div><div class="cal-grid">';
-D.forEach(function(d){o+='<div class="cal-dow">'+d+'</div>'});for(var i=0;i<sd;i++)o+='<div class="cal-day cal-empty"></div>';
-for(var d=1;d<=dm;d++){var ds=f(vY,vM,d),dO=new Date(vY,vM,d),pa=dO<td,it=dO.getTime()===td.getTime(),is=sel===ds,c='cal-day';
-if(pa)c+=' cal-disabled';if(it)c+=' cal-today';if(is)c+=' cal-selected';
-o+=pa?'<div class="'+c+'">'+d+'</div>':'<div class="'+c+'" onclick="window.__calPick(\''+ds+'\')">'+d+'</div>'}
-o+='</div>';if(sel)o+='<div class="cal-selected-display">'+sel+'</div>';cw.innerHTML=o}
-window.__calPrev=function(){vM--;if(vM<0){vM=11;vY--}if(vY<td.getFullYear()||(vY===td.getFullYear()&&vM<td.getMonth())){vM=td.getMonth();vY=td.getFullYear()}r()};
-window.__calNext=function(){vM++;if(vM>11){vM=0;vY++}var mx=new Date(td);mx.setMonth(mx.getMonth()+6);if(vY>mx.getFullYear()||(vY===mx.getFullYear()&&vM>mx.getMonth())){vM=mx.getMonth();vY=mx.getFullYear()}r()};
-window.__calPick=async function(ds){sel=ds;h.value=ds;r();var sp=document.getElementById('slotPicker'),th=document.getElementById('reqTime');
-if(sp)sp.style.display='none';if(th)th.value='';document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('slot-active')});
-ai.style.display='block';ai.innerHTML='<span style="color:var(--dim,#999)">Checking...</span>';
-try{var rs=await fetch('https://curious-lemming-262.convex.site/api/booking/availability?slug=weschetattoo&date='+ds);var d=await rs.json();
-if(!d.available){ai.innerHTML='<span class="avail-closed">'+(d.reason==='past'?'Past date':'Closed')+'</span>';return}
-var i='<span class="avail-ok">Available</span>';if(d.busySlots&&d.busySlots.length>0)i+=' <span style="font-size:.72rem;color:var(--dim,#999)">('+d.busySlots.length+' appts)</span>';
-if(d.fullDayBlocked)i='<span class="avail-closed">Fully booked</span>';else if(sp)sp.style.display='block';ai.innerHTML=i}catch(e){ai.innerHTML='';if(sp)sp.style.display='block'}};
-window.__pickSlot=function(s){document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('slot-active')});
-document.getElementById(s==='early'?'slotEarly':'slotLate').classList.add('slot-active');
-var th=document.getElementById('reqTime');if(th)th.value=s==='early'?'09:00':'14:00'};r()})();
-(function(){var ph=[];var mx=5;window.__refPhotos=ph;
-window.__handleRefPhotos=function(inp){Array.from(inp.files||[]).slice(0,mx-ph.length).forEach(function(f){if(f.size>10*1024*1024)return;
-var rd=new FileReader();rd.onload=function(e){var im=new Image();im.onload=function(){var c=document.createElement('canvas'),m=800,w=im.width,h=im.height;
-if(w>m||h>m){if(w>h){h=Math.round(h*m/w);w=m}else{w=Math.round(w*m/h);h=m}}c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);
-ph.push(c.toDataURL('image/jpeg',0.7));rp()};im.src=e.target.result};rd.readAsDataURL(f)});inp.value=''};
-function rp(){var c=document.getElementById('refPreviews');if(!c)return;c.innerHTML='';
-ph.forEach(function(p,i){c.innerHTML+='<div class="ref-thumb-wrap"><img class="ref-thumb" src="'+p+'" alt="Ref"><button type="button" class="ref-thumb-remove" onclick="window.__removeRefPhoto('+i+')">\u00d7</button></div>'});
-var l=document.querySelector('.ref-upload-label');if(l)l.style.display=ph.length>=mx?'none':''};
-window.__removeRefPhoto=function(i){ph.splice(i,1);rp()}})();
-(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==='string'&&u.includes('/api/booking/submit')&&o&&o.body){try{var b=JSON.parse(o.body);
-var rd=document.getElementById('reqDate'),rt=document.getElementById('reqTime');
-if(rd&&rd.value&&rt&&rt.value){b.requestedDate=rd.value;b.requestedTime=rt.value}
-if(window.__refPhotos&&window.__refPhotos.length>0)b.referencePhotos=window.__refPhotos;
-o=Object.assign({},o,{body:JSON.stringify(b)})}catch(e){}}return of.apply(this,[u,o])}})();
-</script>
+function toggleLang(){var h=document.documentElement;h.lang=h.lang==='es'?'en':'es';try{localStorage.setItem('eterno-lang',h.lang)}catch(e){}}
+try{var sl=localStorage.getItem('eterno-lang');if(sl==='es')document.documentElement.lang='es'}catch(e){}
+(function(){var b=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(!b||!l)return;b.addEventListener('click',function(e){e.preventDefault();var isOpen=l.classList.toggle('open');b.classList.toggle('open',isOpen);b.setAttribute('aria-expanded',isOpen?'true':'false')});l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open');b.classList.remove('open');b.setAttribute('aria-expanded','false')})})})();
+(function(){if(!('IntersectionObserver' in window)){document.querySelectorAll('.fade-up').forEach(function(e){e.classList.add('visible')});return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.fade-up').forEach(function(e){o.observe(e)})})();
+var lbS=null;function openLightbox(i){var o=document.getElementById('lightbox'),m=document.getElementById('lightbox-img');if(!o||!m)return;var a=Array.from(document.querySelectorAll('.gallery-item img'));lbS={images:a,current:i};m.src=a[i].src;m.alt=a[i].alt;o.classList.add('active');document.body.style.overflow='hidden'}
+function closeLightbox(){var o=document.getElementById('lightbox');if(!o)return;o.classList.remove('active');document.body.style.overflow='';lbS=null}
+function lightboxNav(d){if(!lbS)return;var m=document.getElementById('lightbox-img'),l=lbS.images.length;lbS.current=(lbS.current+d+l)%l;m.src=lbS.images[lbS.current].src;m.alt=lbS.images[lbS.current].alt}
+document.querySelectorAll('.gallery-item').forEach(function(e,i){e.addEventListener('click',function(){openLightbox(i)})});document.addEventListener('keydown',function(e){if(!lbS)return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1)});var lbo=document.getElementById('lightbox');if(lbo)lbo.addEventListener('click',function(e){if(e.target===this)closeLightbox()});
+var tc=[],ti=0;function loadTestimonials(slug){fetch('https://curious-lemming-262.convex.site/api/testimonials/featured?slug='+encodeURIComponent(slug)).then(function(r){return r.json()}).then(function(d){if(d.testimonials&&d.testimonials.length){tc=d.testimonials.map(function(t){return{text:t.text,author:t.author}});showT(0)}}).catch(function(){})}
+function showT(i){if(!tc.length)return;var t=tc[i%tc.length],c=document.getElementById('testimonials-container');if(!c)return;c.querySelectorAll('.home-testimonial-text').forEach(function(el){el.textContent=t.text});var a=c.querySelector('.home-testimonial-author');if(a)a.textContent='— '+t.author;ti=i}
+function randomTestimonial(){if(!tc.length)return;var n;do{n=Math.floor(Math.random()*tc.length)}while(n===ti&&tc.length>1);showT(n)}
+function setupBookingForm(slug){var f=document.getElementById('booking-request-form');if(!f)return;var status=f.querySelector('.form-status');f.addEventListener('submit',async function(e){e.preventDefault();if(status)status.textContent='Sending request...';var fd=new FormData(f);var payload={slug:slug,sourceUrl:location.href,name:String(fd.get('name')||''),email:String(fd.get('email')||''),phone:String(fd.get('phone')||''),service:String(fd.get('service')||''),placement:String(fd.get('placement')||''),budget:String(fd.get('budget')||''),preferredDates:String(fd.get('preferredDates')||''),message:String(fd.get('message')||'')};try{var res=await fetch('https://curious-lemming-262.convex.site/api/booking/request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});var data={};try{data=await res.json()}catch(_e){}if(!res.ok||data.ok===false)throw new Error(data.message||'Could not send request');f.reset();if(status)status.textContent='Request sent. The artist will follow up with next steps.'}catch(err){if(status)status.textContent=(err&&err.message)||'Could not send request. Please try again or message the artist directly.'}})}
+</script><script>loadTestimonials("weschetattoo");setupBookingForm("weschetattoo");</script>
 </body>
 </html>
