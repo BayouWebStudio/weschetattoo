@@ -11,18 +11,18 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap">
   <style>
 
 :root {
-    --black: #0a0a0a;
-    --near-black: #141414;
-    --charcoal: #141414;
-    --accent: #C9A84C;
-    --accent-dim: rgba(201,168,76,0.6);
-    --white: #e8e0d0;
-    --dim: #e8e0d099;
-    --border: #323232;
+    --black: #0a0505;
+    --near-black: #1a0a0a;
+    --charcoal: #150808;
+    --accent: #C0392B;
+    --accent-dim: rgba(192,57,43,0.6);
+    --white: #f5f5f0;
+    --dim: #888;
+    --border: rgba(255,255,255,0.07);
   }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--black);
   color: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   line-height: 1.6;
   overflow-x: hidden;
@@ -47,11 +47,11 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 .nav-logo {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem; font-weight: 400; letter-spacing: 0.1em;
   color: var(--white); text-decoration: none;
 }
-.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
 .nav-links a {
   color: var(--dim); text-decoration: none;
   font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -108,12 +108,12 @@ nav {
   max-width: 720px; padding: 0 32px;
 }
 .hero-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400;
   line-height: 1.1; margin-bottom: 20px;
 }
 .hero-tagline {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.1rem; font-weight: 300; color: var(--dim);
   max-width: 500px; margin: 0 auto;
 }
@@ -123,7 +123,7 @@ nav {
   display: inline-block; margin-top: 32px;
   padding: 14px 40px;
   background: var(--accent); color: var(--black);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase;
   text-decoration: none;
@@ -138,18 +138,18 @@ section {
   max-width: 1200px; margin: 0 auto;
 }
 .section-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--accent);
   margin-bottom: 18px;
 }
 .section-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 400;
   line-height: 1.2; margin-bottom: 40px;
 }
 .section-body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.05rem; line-height: 1.8; color: var(--dim);
   max-width: 640px;
 }
@@ -230,13 +230,13 @@ section {
 
 /* ── TESTIMONIALS ── */
 .home-testimonial-text {
-  font-family: 'monospace', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.05rem; font-style: italic;
   line-height: 1.7; margin-bottom: 16px;
   opacity: 0.9;
 }
 .home-testimonial-author {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.78rem; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--accent);
 }
@@ -299,17 +299,6 @@ section {
 .booking-fallback:hover { color: var(--accent); }
 
 
-.floating-book {
-  position: fixed; bottom: 24px; right: 24px; z-index: 99;
-  background: #C9A84C; color: #0a0a0a;
-  padding: 12px 24px; border-radius: 3px;
-  font-family: inherit; font-size: 0.72rem;
-  font-weight: 500; letter-spacing: 0.12em;
-  text-transform: uppercase; text-decoration: none;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  transition: opacity 0.2s, transform 0.2s;
-}
-.floating-book:hover { opacity: 0.88; transform: translateY(-2px); }
 
 /* ── FOOTER ── */
 footer {
@@ -385,11 +374,11 @@ html[lang="es"] [data-es] { display: revert; }
     <p class="section-label">About the Artist</p>
     <h2 class="section-title fade-up">Raul Wesche</h2>
     <div class="section-body fade-up">
-      <p>Raul Wesche shares geometric work through @weschetattoo, with this page built around details visible from their public Instagram profile. Their Instagram bio says: “Geometric Tattoo Artist Books open November 1st Houston Texas @allegoryink — Inks @vesica.studio.app — My drawing app @masttattoo.official — Carts”. Location listed: Houston Texas. Instagram following: 297,086. Instagram posts: 1,619. Recent caption themes: geometrictattoo, healed, houstontattooartist, allegoryink, session. For current availability, flash, and booking details, contact them through Instagram or the booking link.</p>
+      <p>Raul Wesche shares geometric work through @weschetattoo, with this page built around details visible from their public Instagram profile. Their Instagram bio says: “Geometric Tattoo Artist Books open November 1st Houston Texas @allegoryink — Inks @vesica.studio.app — My drawing app @masttattoo.official — Carts”. Location listed: Houston Texas. Instagram following: 297,087. Instagram posts: 1,619. Recent caption themes: geometrictattoo, healed, houstontattooartist, allegoryink, session. For current availability, flash, and booking details, contact them through Instagram or the booking link.</p>
       <p class="style-list">geometric</p>
       <ul class="profile-facts">
         <li>Location: Houston Texas</li>
-        <li>Instagram followers: 297,086</li>
+        <li>Instagram followers: 297,087</li>
         <li>Instagram posts: 1,619</li>
         <li>Recent caption themes: geometrictattoo, healed, houstontattooartist, allegoryink, session</li>
       </ul>
@@ -426,7 +415,7 @@ html[lang="es"] [data-es] { display: revert; }
     <img src="" alt="" id="lightbox-img">
     <button class="lightbox-arrow lightbox-next" onclick="lightboxNav(1)" aria-label="Next">&#8250;</button>
   </div>
-  <a href="http://wesche.com/" class="floating-book" target="_blank" rel="noopener">Book</a>
+  
   <script>
 function toggleLang(){var h=document.documentElement;h.lang=h.lang==='es'?'en':'es';try{localStorage.setItem('eterno-lang',h.lang)}catch(e){}}
 try{var sl=localStorage.getItem('eterno-lang');if(sl==='es')document.documentElement.lang='es'}catch(e){}
